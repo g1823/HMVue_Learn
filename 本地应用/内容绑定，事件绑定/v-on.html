@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style></style>
+    <script type="text/javascript" src="../../vue.js"></script>
+</head>
+<body>
+
+    <div id='root'>
+        <h1>v-on表示为元素绑定事件</h1>
+        可以将v-on:简写为@<br/>
+        点击事件:click<br/>
+            <button v-on:click="m1">click</button>
+            <button @click="m1">click</button>
+        <br/>
+
+        鼠标移入事件:mouseenter<br/>
+            <button v-on:mouseenter="m2">mouseenter</button>
+            <button @mouseenter="m2">mouseenter</button>
+        <br/>
+
+        双击事件:dblclick<br/>
+            <button v-on:dblclick="m3">dblclick</button>
+            <button @dblclick="m3">dblclick</button>
+        <br/>
+
+        <h5 @click="change">测试获取数据：{{test}}</h5>
+    </div>
+    <script>
+        new Vue({
+            el:"#root",
+            data:{
+                test:"data中test"
+            },
+            // 注意，v-on绑定的事件必须写在methods属性中
+            methods:{
+                m1(){
+                    alert("click")
+                },
+                m2(){
+                    alert("mouseenter")
+                },
+                m3(){
+                    alert("dblclick")
+                },
+                change(){
+                    // 直接使用this就可以获取
+                    this.test="获取到data中的test"
+                }
+            }
+        })
+    </script>
+</body>
+</html>

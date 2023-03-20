@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style></style>
+    <script type="text/javascript" src="../../vue.js"></script>
+</head>
+<body>
+    <div id='root'>
+        <h1>展示v-if指令以及v-if和v-show的区别</h1>
+        v-if和v-show中的值都是js表达式<br/>
+        <button @click="changeB">点击显示</button><br/>
+        v-if指令:<br/>
+        <p v-if="b">v-if指令</p>
+        v-show指令:<br/>
+        <p v-show="b">v-show指令</p>
+        结果:<br/>
+        v-if指令如果为false,会直接从dom种删除对应元素——操纵dom树,消耗大<br/>
+        v-show指令如果为false,会给对应元素添加 style="display: none;"——操纵css样式,消耗小<br/>
+        <img src="images/2023-03-19-19-33-26.png">
+    </div>
+    <script>
+        const vm = new Vue({
+            el:"#root",
+            data:{
+                b:false
+            },
+            methods:{
+                changeB(){
+                    this.b = !this.b;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

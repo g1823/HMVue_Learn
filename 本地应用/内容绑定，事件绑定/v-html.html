@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style></style>
+    <script type="text/javascript" src="../../vue.js"></script>
+</head>
+<body>
+    <div id='root'>
+        <!-- 使用v-text指令，内部的html标签并不会被解析 -->
+        <p v-text="content"></p>
+        <!-- 使用v-html指令，内部的html标签会被解析成对应的内容 -->
+        <p v-html="content"></p>
+        效果如下：<br/>
+        <img src="images/2023-03-19-16-11-56.png">
+    </div>
+    <script>
+        new Vue({
+            el:"#root",
+            data:{
+                content:"<a href='http://www.baidu.com'>v-html测试</a>"
+            }
+        })
+    </script>
+</body>
+</html>

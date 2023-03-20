@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style></style>
+    <script type="text/javascript" src="../../vue.js"></script>
+</head>
+<body>
+    <div id='root'>
+        <!-- 第一种写法：v-text -->
+        <h2 v-text="message"></h2>
+        <!-- 第二种写法：插值表达式，即{{}} -->
+        <h2>插值表达式{{message}}</h2>
+        <!-- 插值表达式内部其实是js表达式 -->
+        <h2>插值表达式2{{message + '!'}}</h2>
+    </div>
+    <script>
+        new Vue({
+            el:"#root",
+            data:{
+                message:'Vue'
+            }
+        })
+    </script>
+</body>
+</html>

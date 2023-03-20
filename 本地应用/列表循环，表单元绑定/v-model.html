@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style></style>
+    <script type="text/javascript" src="../../vue.js"></script>
+</head>
+<body>
+    <div id='root'>
+        <h2>v-model作用为获取和设置表单元素的值(双向数据绑定)</h2>
+        <h4>v-model只能和表单元素绑定</h4>
+        <h4>
+            注意:{{}}、v-bind:、v-model都可以绑定数据<br/>
+            但是，{{}}、v-bind:为单项绑定,属性值变不会影响data中的数据,data中数据变化会影响页面中属性<br/>
+            v-model表示表单中的属性改变可以影响到data中的数据,反之亦然<br>
+        </h4>
+        
+        <span>{{test}}</span>
+        <input type="text" :value="test">
+        <input type="text" v-model:vaule="test">
+    </div>
+    <script>
+        const vm = new Vue({
+            el:"#root",
+            data:{
+                test:"132"
+            }
+        })
+    </script>
+</body>
+</html>

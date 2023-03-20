@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .active{
+            border: 1px solid red;
+            width:30%
+        }
+    </style>
+    <script type="text/javascript" src="../../vue.js"></script>
+</head>
+<body>
+    <div id='root'>
+        <!-- 元素的属性有很多种，例如src、title、class等，即写在元素标签的内部 -->
+        <h1>v-bind用来为元素绑定属性,v-bind可以简写成":"</h1>
+        <img v-bind:src="imgSrc" :title="imgTitle" style="width:30% ;"><br/>
+        使用三元表达式(class="isActive ? 'active' : '' "),为img添加class属性调整样式:点击图片切换样式<br/>
+        <img v-bind:src="imgSrc2" :title="imgTitle" :class="isActive?'active':''" @click="changeA">
+        <br/>
+        也可以使用对象的方式({active:isActive}),表示active是否生效,取决于后面表达式的值<br/>
+        <img v-bind:src="imgSrc2" :title="imgTitle" :class="{active:isActive}" @click="changeA">
+    </div>
+    <script>
+        const vm = new Vue({
+            el:"#root",
+            data:{
+                imgSrc:"D:\\tu\\S005Sayathefox\\NO.01\\图宫社0306.jpg",
+                imgSrc2:"D:\\tu\\S005Sayathefox\\NO.01\\图宫社0297.jpg",
+                imgTitle:"v-bind测试",
+                isActive:true,    
+            },
+            methods:{
+                changeA(){
+                    this.isActive = !this.isActive;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

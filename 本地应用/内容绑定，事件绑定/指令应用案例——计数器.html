@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>计数器</title>
+    <style></style>
+    <script type="text/javascript" src="../../vue.js"></script>
+</head>
+<body>
+    <div id='root'>
+        <button @click="add">+</button>
+        <span>{{num}}</span>
+        <button @click="sub">-</button>
+    </div>
+    <script>
+        new Vue({
+            el:"#root",
+            data:{
+                num:1
+            },
+            methods:{
+                add(){
+                    if(this.num >= 10){
+                        alert("达到最大值了");
+                    }else{
+                        this.num++;
+                    }
+                },
+                sub(){
+                    if(this.num <= 0){
+                        alert("达到最小值了");
+                    }else{
+                        this.num--;
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

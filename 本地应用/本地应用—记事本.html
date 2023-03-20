@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div{
+            width: 500px;
+            height: 500px;
+            background-color: #1E90FF;
+        }
+        .center-in-center{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            -o-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+    </style>
+    <script type="text/javascript" src="../vue.js"></script>
+</head>
+<body>
+    <div id='root' class="center-in-center">
+        <!-- 使用v-model获取用户数据(双向绑定) -->
+        <!-- 事件绑定 v-on .enter回车调用方法添加数据 -->
+        <input type="text" v-model:value="d" @keyup.enter="add" style="width:490px ;">
+        <ul>
+            <!-- 使用v-for生成列表结构 -->
+            <li v-for="(item,index) in list">{{item}} <span style="float: right;" v-on:click="del(index)">x&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+        </ul>
+
+
+        
+    </div>
+    <script>
+        const vm = new Vue({
+            el:"#root",
+            data:{
+                //该变量用来保存用户输入的值
+                d:"",
+                // 使用字符串数组保存数据
+                list:["事件1","事件2","事件3"]
+            },
+            methods:{
+                add(){
+                    this.list.push(this.d);
+                },
+                del(p){
+                    // 数组.splice(index,num)为删除数组中对应下标的元素
+                    //index表示删除的起始下标，num表示删除的个数
+                    this.list.splice(p,1);
+                },
+                sum(){
+                    
+                }
+            }
+        })
+    </script>
+</body>
+</html>

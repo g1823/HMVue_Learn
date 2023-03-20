@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style></style>
+    <script type="text/javascript" src="../../vue.js"></script>
+</head>
+<body>
+    <div id='root'>
+        v-for 语法： v-for = " (item, index) in 数组或其他集合" 其中item为集合中的数据,index为当前下标
+        <ul>
+            <li v-for="(item,index) in arr">v-for数组,内容:{{item}},第{{index}}项</li>   
+        </ul>
+        <button @click="add">添加数据</button> <button @click="remove">删除数据</button>
+        <h3 v-for="(item,index) in objArr">v-for对象数组,内容:{{item.name}},第{{index}}项</h3>
+    </div>
+    <script>
+        const vm = new Vue({
+            el:"#root",
+            data:{
+                arr:[1,2,3,4,5,6],
+                objArr:[
+                    {name:'张三'},
+                    {name:'李四'},
+                    {name:'王五'}
+                ]
+            },
+            methods:{
+                add(){
+                    this.objArr.push({ name:"赵六"})
+                },
+                remove(){
+                    this.objArr.shift();
+                }
+            }
+        })
+    </script>
+</body>
+</html>
