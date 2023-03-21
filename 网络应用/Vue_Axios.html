@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style></style>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="../vue.js"></script>
+</head>
+<body>
+    <div id='root'>
+        <input type="button" value="获取笑话" @click="getJoke">
+        <br>
+        {{joke}}
+        <br>
+        {{joke2}}
+    </div>
+    <script>
+        const vm = new Vue({
+            el:"#root",
+            // https://autumnfish.cn/api/joke
+            data:{
+                joke:"笑话",
+                joke2:"笑话2"
+            },
+            methods:{
+                getJoke(){
+                    var Vue_this = this;
+                    axios.get("https://autumnfish.cn/api/joke").then(
+                        function(response){
+                            //这里的this是window
+                            console.log(this);
+                            //第一种解决方案
+                            vm._data.joke = response.data;
+                            //第二种解决方法
+                            //  在方法外面定义一个不叫this的变量保存Vue实例
+                            Vue_this.joke2 = response.data
+                        },
+                        function(error){
+
+                        }
+                    )
+                }
+            }
+        })
+    </script>
+</body>
+</html>

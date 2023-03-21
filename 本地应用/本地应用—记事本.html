@@ -30,6 +30,8 @@
         <ul>
             <!-- 使用v-for生成列表结构 -->
             <li v-for="(item,index) in list">{{item}} <span style="float: right;" v-on:click="del(index)">x&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+            <li v-show="list.length != 0 ">总计{{ list.length }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button @click="clean">清空</button></li>
+
         </ul>
 
 
@@ -53,8 +55,8 @@
                     //index表示删除的起始下标，num表示删除的个数
                     this.list.splice(p,1);
                 },
-                sum(){
-                    
+                clean(){
+                    this.list = []
                 }
             }
         })
