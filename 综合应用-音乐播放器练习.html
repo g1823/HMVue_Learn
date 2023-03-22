@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .father{
+            width: 800px;
+            height: 500px;
+            background-color: orange;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+        .top{
+            width: 100%;
+            height: 12%;
+        }
+        .left{
+            width: 25%;
+            height: 88%;
+            float: left;
+            background-color:aqua;
+        }
+        .mid{
+            width: 50%;
+            height: 88%;
+            float: left;
+            background-color: blueviolet;
+        }
+        .right{
+            width: 25%;
+            height: 88%;
+            float: left;
+            background-color: bisque;
+        }
+    </style>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="vue.js"></script>
+</head>
+<body>
+    <div id='root' class="father">
+        <div class="top">
+            <input type="text" v-model:value="quary" style="width: 80%;" @keyup.enter="quaryMusic">
+            <input type="button" @click="quaryMusic" value="搜索">
+        </div>
+        <div class="left">
+            <ul>
+                <li v-for="(item,index) in musicList"><a @click="playMusic(item.id)" style="cursor: pointer;">▶</a>&nbsp;&nbsp;&nbsp;{{item.name}}</li>
+            </ul>
+        </div>
+        <div class="mid">
+            <audio :src="musicURL" autoplay="autoplay" controls="controls" loop="loop" ></audio>
+            <img :src="musicIMG" style="width:100% ;">
+        </div>
+        <div class="right">
+            <ul>
+                <li v-for="item in musicCom">{{}}</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        const vm = new Vue({
+            el:"#root",
+            data:{
+                quary:"",
+                musicList:[],
+                musicURL:"",
+                musicIMG:"",
+                musicCom:[]
+            },
+            methods:{
+                quaryMusic(){
+                    var v = this;
+                    axios.get("https://autumnfish.cn/search?keywords="+this.quary)
+                    .then(
+                        function(response){
+                            v.musicList = response.data.result.songs;    
+                        },function(err){
+                            console.log(err);
+                        }
+                    )
+                },
+                playMusic(id){
+                    var v = this;
+                    console.log(id);
+                    //获取歌曲地址
+                    axios.get("https://autumnfish.cn/song/url?id="+id)
+                    .then(
+                        function(response){
+                            v.musicURL = response.data.data[0].url;
+                        },
+                        function(err){
+                            console.log(err);
+                        }
+                    )
+                    //获取歌曲封面
+                    axios.get("https://autumnfish.cn/song/detail?ids="+id)
+                    .then(
+                        function(response){
+                            v.musicIMG = response.data.songs[0].al.picUrl;
+                        },
+                        function(err){
+                            console.log(err);
+                        }
+                    )
+                    //获取歌曲评论
+                    axios.get("https://autumnfish.cn/comment/hot?type=0$id="+id)
+                    .then(
+                        function(response){
+                            console.log(response)
+                            //v.musicIMG = response.data.songs[0].al.picUrl;
+                        },
+                        function(err){
+                            console.log(err);
+                        }
+                    )
+                },
+
+                
+            }
+        })
+    </script>
+</body>
+</html>
